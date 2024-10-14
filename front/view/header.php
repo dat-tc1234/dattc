@@ -211,7 +211,8 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse custom-navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav nav-items">
+                    <!-- Main Navigation Menu with Margin for Separation -->
+                    <ul class="navbar-nav nav-items me-lg-4">
                         <?php if (!isset($categories) || !is_array($categories)) {
                             $categories = [];
                         } ?>
@@ -278,14 +279,17 @@
         </nav>
     </div>
 
+    <!-- JavaScript Alert Function -->
     <script>
         function showLoginAlert(event) {
             event.preventDefault();
             alert("Bạn cần đăng nhập để sử dụng tính năng này.");
         }
     </script>
+    
+    <!-- Bootstrap JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
 </body>
-
 </html>
+

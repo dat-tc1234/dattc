@@ -47,9 +47,9 @@
         return $kq;
     }
 
-    function update_product($id, $ten_sp, $gia, $so_luong_hang, $mo_ta_sp, $id_danh_muc, $cong_suat, $cong_nghe, $chat_lieu, $chuc_nang, $so_canh, $toc_do, $new_arrival, $featured, $best_seller, $images = "") {
+    function update_product($id, $ten_sp, $gia, $so_luong_hang, $mo_ta_sp, $id_danh_muc, $cong_suat, $cong_nghe, $chat_lieu, $chuc_nang, $so_canh, $toc_do, $images = "", $new_arrival, $featured, $best_seller) {
         $conn = connect_db();
-        if ($images == "") {
+        if($images == "") {
             $sql = "UPDATE products SET ten_sp = :ten_sp, gia = :gia, so_luong_hang = :so_luong_hang, 
                     mo_ta_sp = :mo_ta_sp, id_danh_muc = :id_danh_muc, cong_suat = :cong_suat, 
                     cong_nghe = :cong_nghe, chat_lieu = :chat_lieu, chuc_nang = :chuc_nang, 
@@ -62,7 +62,7 @@
                     so_canh = :so_canh, toc_do = :toc_do, images = :images, 
                     new_arrival = :new_arrival, featured = :featured, best_seller = :best_seller WHERE id = :id";
         }
-    
+        
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':ten_sp', $ten_sp);
         $stmt->bindParam(':gia', $gia);
@@ -79,10 +79,10 @@
         $stmt->bindParam(':featured', $featured);
         $stmt->bindParam(':best_seller', $best_seller);
         $stmt->bindParam(':id', $id);
-        if ($images != "") {
+        if($images != "") {
             $stmt->bindParam(':images', $images);
         }
-    
+        
         $stmt->execute();
     }
 

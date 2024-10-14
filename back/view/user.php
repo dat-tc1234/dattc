@@ -57,3 +57,12 @@
         </tbody>
     </table>
 </div>
+
+<!-- JavaScript để xác nhận ẩn người dùng -->
+<script>
+    function confirmHideUser(userId) {
+        if (confirm("Bạn có chắc chắn muốn ẩn người dùng này không?")) {
+            window.location.href = `index.php?act=hide_user&id=${userId}`;
+        }
+    }
+</script>

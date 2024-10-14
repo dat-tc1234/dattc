@@ -137,17 +137,8 @@
                     <li class="nav-item">
                         <a class="nav-link" href="index.php?act=hidden_items">Mục Ẩn</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-user-circle"></i> Tài Khoản
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#"><i class="fas fa-user"></i> Hồ Sơ</a></li>
-                            <li><a class="dropdown-item" href="#"><i class="fas fa-cog"></i> Cài Đặt</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt"></i> Đăng Xuất</a></li>
-                        </ul>
-                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.php?act=danh_gia_va_phan_hoi_khach_hang">Đánh giá và phản hồi</a>
                 </ul>
             </div>
         </div>

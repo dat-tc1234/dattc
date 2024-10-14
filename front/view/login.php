@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['role'] = $user['role'];
 
         // Điều hướng theo quyền
-        if ($user['role'] == 0) {
+        if ($user['role'] == 1) {
             header("Location: http://localhost/Project/back"); 
         } else {
             header("Location: http://localhost/Project/front/"); 

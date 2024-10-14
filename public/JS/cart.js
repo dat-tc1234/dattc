@@ -3,7 +3,7 @@
 // Hàm để thêm sản phẩm vào giỏ hàng
 function addToCart(product) {
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    console.log('kukii');
+    console.log(cart)
     const existingProductIndex = cart.findIndex(item => item.id === product.id);
     if (existingProductIndex > -1) {
         // Nếu sản phẩm đã có, tăng số lượng
@@ -21,6 +21,7 @@ function addToCart(product) {
 
 // Thêm sự kiện cho tất cả các nút "Add to cart"
 document.querySelectorAll('.add-to-cart').forEach(button => {
+    
     button.addEventListener('click', function(event) {
         event.preventDefault(); // Ngăn chặn hành động mặc định của liên kết
         const product = {

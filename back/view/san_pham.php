@@ -73,7 +73,7 @@
         </div>
     </form>
 
-    <table class="table table-striped">
+     <table class="table table-striped">
         <thead>
             <tr class="text-center">
                 <th>STT</th>
@@ -85,15 +85,14 @@
                 <th>Mô tả</th>
                 <th>Thông số kỹ thuật</th>
                 <th>Ngày đăng</th>
-                <th>Trạng thái</th> <!-- Thêm cột trạng thái -->
+                <th>Trạng thái</th>
                 <th>Hành động</th>
             </tr>
         </thead>
         <tbody>
         <?php
-        // Lấy sản phẩm từ cơ sở dữ liệu dựa trên checkbox
-        $kq = get_products_based_on_filters(); // Hàm này sẽ được định nghĩa bên dưới
-        if(isset($kq) && (count($kq) > 0)){
+        // Giả sử $kq chứa danh sách sản phẩm từ cơ sở dữ liệu
+        if(isset($kq) && count($kq) > 0){
             $start_index = ($current_page - 1) * $items_per_page;
             foreach ($kq as $index => $item){
                 $stt = $start_index + $index + 1;
@@ -105,16 +104,11 @@
                     }
                 }
 
+                // Lấy trạng thái từ checkbox
                 $status = [];
-                if ($item['new_arrival']) {
-                    $status[] = 'New Arrivals';
-                }
-                if ($item['featured']) {
-                    $status[] = 'Featured Products';
-                }
-                if ($item['best_seller']) {
-                    $status[] = 'Best Sellers';
-                }
+                if ($item['new_arrival']) $status[] = 'New Arrivals';
+                if ($item['featured']) $status[] = 'Featured Products';
+                if ($item['best_seller']) $status[] = 'Best Sellers';
                 $status_display = !empty($status) ? implode(', ', $status) : 'Không có danh mục';
 
                 echo '<tr class="text-center">
@@ -135,7 +129,7 @@
                             </button>
                         </td>
                         <td class="align-middle">'.$item['ngay_dang'].'</td>
-                        <td class="align-middle">'.$status_display.'</td> <!-- Hiển thị trạng thái -->
+                        <td class="align-middle">'.$status_display.'</td>
                         <td class="align-middle">
                             <div class="d-flex flex-column align-items-center">
                                 <a href="index.php?act=update_san_pham&id='.$item['id'].'" class="btn btn-sm btn-warning mb-2 w-50" onclick="return confirmEdit()">Sửa</a>
@@ -150,8 +144,8 @@
     </table>
 
     <?php
-    // Tạo modals cho tất cả sản phẩm
-    if(isset($kq) && (count($kq) > 0)){
+    // Modal cho các sản phẩm
+    if(isset($kq) && count($kq) > 0){
         foreach ($kq as $item){
             // Modal cho thông số kỹ thuật
             echo '<div class="modal fade" id="specModal'.$item['id'].'" tabindex="-1" role="dialog" aria-labelledby="specModalLabel'.$item['id'].'" aria-hidden="true">
@@ -180,7 +174,7 @@
             // Modal cho hình ảnh
             $images = json_decode($item['images'], true);
             echo '<div class="modal fade" id="imageModal'.$item['id'].'" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel'.$item['id'].'" aria-hidden="true">
-                    <div class="modal-dialog modal-sl" role="document">
+                    <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="imageModalLabel'.$item['id'].'">Hình ảnh: '.$item['ten_sp'].'</h5>
@@ -220,12 +214,16 @@
     }
     ?>
 </div>
+
 <!-- Pagination -->
-
 <?php
-    require_once 'pagination.php';
-    echo renderPagination($current_page, $total_pages, '?act=san_pham&page=%d');
+require_once 'pagination.php';
+echo renderPagination($current_page, $total_pages, '?act=san_pham&page=%d');
 ?>
-<script src="http://localhost/project/public/JS/back_product.js"></script>
 
+<!-- Bootstrap CSS and JS for modal and carousel functionality -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 
+<script src="http://localhost/Project/public/JS/back_product.js"></script>

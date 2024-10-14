@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-// Database connection (if needed)
+// Kết nối cơ sở dữ liệu
 require_once 'C:\xampp\htdocs\Project\database\connect_db.php';
 $conn = connect_db();
 
@@ -9,25 +9,34 @@ if (!$conn) {
     die("Unable to connect to the database.");
 }
 
+// Khởi tạo giỏ hàng nếu chưa có
 if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = [];
 }
 
+// Kiểm tra nếu request là POST và có action
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     $action = $_POST['action'];
+    
+    // Ghi log giá trị action nhận được
+    error_log("Action received: " . $action);
+    
     switch ($action) {
         case 'add_to_cart':
+            // Lấy thông tin sản phẩm từ POST
             $productId = $_POST['product_id'] ?? null;
             $productName = $_POST['product_name'] ?? null;
             $productPrice = isset($_POST['product_price']) ? (float)$_POST['product_price'] : null;
             $productImage = $_POST['product_image'] ?? '/img/default-product.jpg';
             $quantity = isset($_POST['quantity']) ? (int)$_POST['quantity'] : 1;
 
+            // Kiểm tra thông tin sản phẩm đầy đủ
             if (!$productId || !$productName || !$productPrice) {
                 echo json_encode(['status' => 'error', 'message' => 'Thông tin sản phẩm không đầy đủ!']);
                 exit;
             }
 
+            // Kiểm tra nếu sản phẩm đã tồn tại trong giỏ hàng
             $productFound = false;
             foreach ($_SESSION['cart'] as &$item) {
                 if ($item['id'] === $productId) {
@@ -37,6 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
                 }
             }
 
+            // Thêm sản phẩm mới nếu chưa có trong giỏ hàng
             if (!$productFound) {
                 $_SESSION['cart'][] = [
                     'id' => $productId,
@@ -97,10 +107,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
             }
             break;
 
+        case 'checkout':
+            // Xử lý logic thanh toán tại đây
+            if (!empty($_SESSION['cart'])) {
+                // Giả lập xử lý thanh toán thành công
+                $_SESSION['cart'] = []; // Xóa giỏ hàng sau khi thanh toán
+                echo json_encode(['status' => 'success', 'message' => 'Thanh toán thành công!']);
+            } else {
+                echo json_encode(['status' => 'error', 'message' => 'Giỏ hàng trống.']);
+            }
+            break;
+
         default:
-            echo json_encode(['status' => 'error', 'message' => 'Hành động không hợp lệ.']);
+            // Thêm giá trị action vào thông báo lỗi để dễ dàng kiểm tra
+            echo json_encode(['status' => 'error', 'message' => "Hành động không hợp lệ: $action"]);
             break;
     }
 } else {
-    echo json_encode(['status' => 'error', 'message' => 'Phương thức yêu cầu không hợp lệ.']);
+    // Thông báo lỗi nếu không phải POST hoặc không có action
+    echo json_encode(['status' => 'error', 'message' => 'Phương thức yêu cầu không hợp lệ hoặc không có hành động.']);
 }
