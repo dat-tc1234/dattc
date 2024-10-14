@@ -36,33 +36,33 @@
         <div class="row justify-content-center">
             <div class="col-md-2 mb-3">
                 <label for="cong_suat" class="form-label">Công suất</label>
-                <input type="text" class="form-control" id="cong_suat" name="cong_suat" value="<?php echo htmlspecialchars($sp['cong_suat']); ?>">
+                <input type="text" class="form-control" id="cong_suat" name="cong_suat" value="<?php echo htmlspecialchars($sp['cong_suat']); ?>" required>
             </div>
             <div class="col-md-2 mb-3">
                 <label for="cong_nghe" class="form-label">Công nghệ</label>
-                <input type="text" class="form-control" id="cong_nghe" name="cong_nghe" value="<?php echo htmlspecialchars($sp['cong_nghe']); ?>">
+                <input type="text" class="form-control" id="cong_nghe" name="cong_nghe" value="<?php echo htmlspecialchars($sp['cong_nghe']); ?>" required>
             </div>
         </div>
         
         <div class="row justify-content-center">
             <div class="col-md-2 mb-3">
                 <label for="chat_lieu" class="form-label">Chất liệu</label>
-                <input type="text" class="form-control" id="chat_lieu" name="chat_lieu" value="<?php echo htmlspecialchars($sp['chat_lieu']); ?>">
+                <input type="text" class="form-control" id="chat_lieu" name="chat_lieu" value="<?php echo htmlspecialchars($sp['chat_lieu']); ?>" required>
             </div>
             <div class="col-md-2 mb-3">
                 <label for="chuc_nang" class="form-label">Chức năng</label>
-                <input type="text" class="form-control" id="chuc_nang" name="chuc_nang" value="<?php echo htmlspecialchars($sp['chuc_nang']); ?>">
+                <input type="text" class="form-control" id="chuc_nang" name="chuc_nang" value="<?php echo htmlspecialchars($sp['chuc_nang']); ?>" required>
             </div>
         </div>
         
         <div class="row justify-content-center">
             <div class="col-md-2 mb-3">
                 <label for="so_canh" class="form-label">Số cánh</label>
-                <input type="text" class="form-control" id="so_canh" name="so_canh" value="<?php echo htmlspecialchars($sp['so_canh']); ?>">
+                <input type="text" class="form-control" id="so_canh" name="so_canh" value="<?php echo htmlspecialchars($sp['so_canh']); ?>" required>
             </div>
             <div class="col-md-2 mb-3">
                 <label for="toc_do" class="form-label">Tốc độ</label>
-                <input type="text" class="form-control" id="toc_do" name="toc_do" value="<?php echo htmlspecialchars($sp['toc_do']); ?>">
+                <input type="text" class="form-control" id="toc_do" name="toc_do" value="<?php echo htmlspecialchars($sp['toc_do']); ?>" required>
             </div>
         </div>
 
@@ -105,7 +105,7 @@
         <div class="row justify-content-center mb-3">
             <div class="col-md-8">
                 <label for="mo_ta_sp" class="form-label">Mô tả sản phẩm</label>
-                <textarea class="form-control" id="mo_ta_sp" name="mo_ta_sp" rows="5"><?php echo htmlspecialchars($sp['mo_ta_sp']); ?></textarea>
+                <textarea class="form-control" id="mo_ta_sp" name="mo_ta_sp" rows="5" required><?php echo htmlspecialchars($sp['mo_ta_sp']); ?></textarea>
             </div>
         </div>
 
@@ -114,4 +114,4 @@
         </div>
     </form>
 </div>
-<script src="http://localhost/fanimation/public/JS/back_product.js"></script>
+<script src="http://localhost/Project/public/JS/back_product.js"></script>

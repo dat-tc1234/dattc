@@ -1,22 +1,204 @@
-.thumbnail-small {
-    width: 80px;
-    height: 80px;
-    margin-right: 5px;
-}
-.similar-product img {
-    width: 150px;
-    height: 150px;
-    margin-right: 20px;
+/* Reset margin và padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.stock-status {
-    padding: 10px 15px;
-    background-color: #28a745; /* Màu xanh lá cây cho trạng thái còn hàng */
-    color: white;
+/* Nền và font chữ */
+body {
+    font-family: 'Poppins', sans-serif;
+    color: #444;
+    background-color: #f3f4f8;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+/* Tiêu đề chính */
+h1, h2, h4 {
+    color: #00509d;
+    font-weight: 700;
+    text-align: center;
+    margin: 20px 0;
+    text-transform: capitalize;
+    letter-spacing: 1px;
+}
+
+/* Mô tả và văn bản */
+p {
+    color: #666;
+    font-size: 1.1rem;
+    margin: 10px 0;
+}
+
+/* Ảnh sản phẩm */
+.product-image-container .image-wrapper img {
+    width: 100%;
+    border-radius: 15px;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.product-image-container .image-wrapper img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2);
+}
+
+/* Thẻ sản phẩm */
+.card {
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: #ffffff;
+}
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Hình ảnh sản phẩm bên trong thẻ */
+.card-img-top {
+    height: 240px;
+    object-fit: cover;
+    border-radius: 15px 15px 0 0;
+    transition: transform 0.3s ease;
+}
+.card-img-top:hover {
+    transform: scale(1.05);
+}
+
+/* Tiêu đề sản phẩm */
+.card-body h5 {
+    color: #00a86b;
+    font-size: 1.3rem;
+    font-weight: 700;
+    text-align: center;
+    margin: 15px 0;
+}
+
+/* Giá sản phẩm */
+.card-body p {
+    font-size: 1.2rem;
+    color: #777;
+    text-align: center;
+    font-weight: 600;
+}
+
+/* Nút thêm vào giỏ hàng */
+.market-button {
+    display: block;
+    width: 100%;
+    color: #ffffff;
+    background-color: #00509d;
+    border: none;
+    padding: 12px 0;
     font-weight: bold;
-    border-radius: 5px;
+    font-size: 1rem;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0px 8px 16px rgba(0, 80, 157, 0.3);
+    text-align: center;
+    margin-top: 15px;
+}
+.market-button:hover {
+    background-color: #003a70;
+    box-shadow: 0px 10px 20px rgba(0, 80, 157, 0.5);
 }
 
-.product-image-container {
-    position: relative;
+/* Mô tả sản phẩm */
+.mt-4.border.p-3.bg-light.rounded.shadow-sm {
+    background: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+    padding: 25px;
+    margin-top: 25px;
+}
+
+/* Sản phẩm tương tự */
+.card h5.card-title {
+    font-size: 1.2rem;
+    color: #333;
+    font-weight: bold;
+    text-align: center;
+}
+.card .card-text {
+    color: #00509d;
+    font-weight: 600;
+    text-align: center;
+}
+
+/* Ảnh sản phẩm tương tự */
+.similar-product .card-img-top {
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+.similar-product:hover .card-img-top {
+    transform: scale(1.05);
+}
+
+/* Nút sản phẩm tương tự */
+.btn-outline-primary {
+    border-color: #00509d;
+    color: #00509d;
+    font-weight: 500;
+    padding: 10px 20px;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    margin: 15px auto;
+    display: block;
+    width: fit-content;
+}
+.btn-outline-primary:hover {
+    background-color: #00509d;
+    color: #ffffff;
+    border-color: #00509d;
+}
+
+/* Đánh giá sao */
+.star-rating {
+    direction: rtl;
+    display: inline-flex;
+    gap: 8px;
+    font-size: 2.5rem;
+}
+
+.star-rating input[type="radio"] {
+    display: none;
+}
+
+.star-rating label {
+    color: #ccc;
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.2s ease;
+    text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.2);
+}
+
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+    color: #ffdd00;
+    transform: scale(1.1);
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+.star-rating input[type="radio"]:checked ~ label {
+    color: #ffa500;
+}
+
+.star-rating label:active {
+    transform: scale(1.2);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .card-img-top {
+        height: 200px;
+    }
+    .market-button {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+    h1, h2, h4 {
+        font-size: 1.6rem;
+    }
 }

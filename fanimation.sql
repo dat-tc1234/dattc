@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 02, 2024 lúc 07:49 AM
+-- Thời gian đã tạo: Th10 04, 2024 lúc 03:03 PM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -34,12 +34,6 @@ CREATE TABLE `category` (
   `parent_id` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Đang đổ dữ liệu cho bảng `category`
---
-
-
-
 -- --------------------------------------------------------
 
 --
@@ -51,7 +45,8 @@ CREATE TABLE `chi_tiet_orders` (
   `order_id` int(11) NOT NULL,
   `id_sp` int(11) NOT NULL,
   `so_luong` int(11) NOT NULL,
-  `gia` decimal(9,0) NOT NULL
+  `gia` decimal(9,0) NOT NULL,
+  `tong_gia_tam_thoi` decimal(9,0) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -64,7 +59,10 @@ CREATE TABLE `orders` (
   `id` int(11) NOT NULL,
   `id_khach_hang` int(11) NOT NULL,
   `ngay_dat` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `tong_gia` decimal(9,0) NOT NULL
+  `tong_gia` decimal(9,0) NOT NULL,
+  `ten_nguoi_nhan` varchar(20) NOT NULL,
+  `so_dien_thoai` varchar(12) NOT NULL,
+  `dia_chi` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -93,12 +91,6 @@ CREATE TABLE `products` (
   `featured` tinyint(1) DEFAULT 0,
   `best_seller` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Đang đổ dữ liệu cho bảng `products`
---
-
-
 
 -- --------------------------------------------------------
 
@@ -130,12 +122,6 @@ CREATE TABLE `user` (
   `role` tinyint(4) NOT NULL DEFAULT 1,
   `hien_thi_user` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Đang đổ dữ liệu cho bảng `user`
---
-
-
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -191,7 +177,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT cho bảng `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT cho bảng `chi_tiet_orders`
@@ -209,19 +195,19 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT cho bảng `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT cho bảng `review`
 --
 ALTER TABLE `review`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT cho bảng `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Các ràng buộc cho các bảng đã đổ

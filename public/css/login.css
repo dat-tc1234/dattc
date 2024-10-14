@@ -1,0 +1,35 @@
+body {
+    background-color:white;
+    color: #FFFFFF;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.row {
+    width: 900px;
+    margin: 50px auto;
+    padding: 30px;
+    border-radius: 30px;
+    box-shadow: 0 2px 4px #FFFFFF;
+    display: flex;
+    align-items: center;
+    background-color: #303030;
+}
+
+.btn-info {
+    width: 100%;
+    color: #FFFFFF;
+}
+
+.FGP {
+    color: #C1CBC1; 
+    text-decoration: none;
+}
+
+.FGP:hover {
+    color: #FFFFFF;
+}
+
+.right img {
+    border-radius: 10px;
+    object-fit: cover;
+}

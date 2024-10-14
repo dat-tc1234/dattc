@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Checkout</title>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        <style>
+            body, html {
+                margin: 0;
+                padding: 0;
+                font-family: Arial, sans-serif;
+                background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+                min-height: 100vh;
+                background-image: url('https://t3.ftcdn.net/jpg/05/28/86/66/360_F_528866602_aiVwnOnkooTrqo3MgicCf83SVVzt1Gnd.jpg') ;
+                
+            }
+            .payment-options img {
+                width: 50px;
+                margin-right: 10px;
+            }
+            .checkout-columns {
+                margin-bottom: 20px;
+            }
+            .contact-column {
+                margin-right: 50px;
+            }
+            .container {
+                background-color: white;
+                border-radius: 15px;
+                padding: 30px;
+                box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            }
+            h1, h2 {
+                color: #0d1210;
+            }
+            .form-control {
+                border-radius: 8px;
+            }
+            .img-fluid {
+                border-radius: 8px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container mt-5">
+            <div class="text-center mb-4">
+                <h1>Thanh toán</h1>
+                <span>(1 item) 2,720,000đ</span>
+            </div>
+            
+            <div class="row checkout-columns">
+                <div class="col-md-5 contact-column">
+                    <h2>Contact</h2>
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="name" class="form-control" id="name" placeholder="Enter your name">
+                    </div>
+                    
+                    <h2>Address</h2>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="address" placeholder="Enter your address">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone number</label>
+                        <input type="number" class="form-control" id="phone" placeholder="Enter your phone number">
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <h2>Your Cart</h2>
+                    <p>1 item</p>
+                    <p>Original price: 3,200,000đ</p>
+                    <p>Delivery: Free</p>
+                    <p>On Sale: -480,000đ</p>
+                    <h3>Total: 2,720,000đ</h3>
+                    <p>(Inclusive of tax 201,481đ)</p>
+                    <a href="#" class="text-primary">Use a promo code</a>
+                    
+                    <div class="d-flex align-items-center my-3">
+                        <img src="shoe-image.jpg" alt="Supernova Stride Move" class="img-fluid" style="width: 100px; height: auto; margin-right: 10px;">
+                        <div>
+                            <p>Supernova Stride Move for...</p>
+                            <p>Size: 6 UK / Quantity: 1</p>
+                            <p>Color: Beige / Green Spark / Oat</p>
+                            <button type="button" class="btn btn-success">Success</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </body>
+    </html>
+</body>
+</html>

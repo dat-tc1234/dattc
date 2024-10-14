@@ -5,11 +5,12 @@ function get_all_reviews() {
             FROM review r 
             JOIN products p ON r.id_san_pham = p.id 
             JOIN user u ON r.id_khach_hang = u.id 
-            ORDER BY r.ngay_bl DESC";
+            WHERE r.hien_thi_bl = 1"; // Chỉ lấy bình luận hiện
     $stmt = $conn->prepare($sql);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
+
 
 function add_review($id_san_pham, $id_khach_hang, $danh_gia, $binh_luan) {
     $conn = connect_db();
@@ -25,9 +26,9 @@ function add_review($id_san_pham, $id_khach_hang, $danh_gia, $binh_luan) {
 
 function hide_review($id) {
     $conn = connect_db();
-    $sql = "UPDATE review SET hien_thi_bl = 0 WHERE id = :id";
+    $sql = "UPDATE review SET hien_thi_bl = 0 WHERE id = :id"; // Sử dụng tên bảng đúng
     $stmt = $conn->prepare($sql);
-    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    $stmt->bindParam(':id', $id);
     return $stmt->execute();
 }
 

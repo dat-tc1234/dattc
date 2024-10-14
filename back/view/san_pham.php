@@ -32,24 +32,24 @@
                 </div>
                 <div class="row">
                     <div class="col-md-3 mb-3">
-                        <input type="text" class="form-control" id="cong_suat" name="cong_suat" placeholder="Nhập công suất">
+                        <input type="text" class="form-control" id="cong_suat" name="cong_suat" placeholder="Nhập công suất" required>
                     </div>
                     <div class="col-md-3 mb-3">
-                        <input type="text" class="form-control" id="cong_nghe" name="cong_nghe" placeholder="Nhập công nghệ">
+                        <input type="text" class="form-control" id="cong_nghe" name="cong_nghe" placeholder="Nhập công nghệ" required>
                     </div>
                     <div class="col-md-3 mb-3">
-                        <input type="text" class="form-control" id="chat_lieu" name="chat_lieu" placeholder="Nhập chất liệu">
+                        <input type="text" class="form-control" id="chat_lieu" name="chat_lieu" placeholder="Nhập chất liệu" required>
                     </div>
                     <div class="col-md-3 mb-3">
-                        <input type="text" class="form-control" id="chuc_nang" name="chuc_nang" placeholder="Nhập chức năng">
+                        <input type="text" class="form-control" id="chuc_nang" name="chuc_nang" placeholder="Nhập chức năng" required>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-3 mb-3">
-                        <input type="text" class="form-control" id="so_canh" name="so_canh" placeholder="Nhập số cánh">
+                        <input type="text" class="form-control" id="so_canh" name="so_canh" placeholder="Nhập số cánh" required>
                     </div>
                     <div class="col-md-3 mb-3">
-                        <input type="text" class="form-control" id="toc_do" name="toc_do" placeholder="Nhập tốc độ">
+                        <input type="text" class="form-control" id="toc_do" name="toc_do" placeholder="Nhập tốc độ" required>
                     </div>
                     <div class="col-md-6 mb-3">
                         <input type="file" class="form-control" id="imgs" name="imgs[]" multiple required accept="image/*">
@@ -58,7 +58,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12 mb-3">
-                        <textarea class="form-control" id="mo_ta_sp" name="mo_ta_sp" rows="5" placeholder="Nhập mô tả sản phẩm"></textarea>
+                        <textarea class="form-control" id="mo_ta_sp" name="mo_ta_sp" rows="5" placeholder="Nhập mô tả sản phẩm" required></textarea>
                     </div>
                 </div>
                 <div class="text-center mb-3">
@@ -91,6 +91,8 @@
         </thead>
         <tbody>
         <?php
+        // Lấy sản phẩm từ cơ sở dữ liệu dựa trên checkbox
+        $kq = get_products_based_on_filters(); // Hàm này sẽ được định nghĩa bên dưới
         if(isset($kq) && (count($kq) > 0)){
             $start_index = ($current_page - 1) * $items_per_page;
             foreach ($kq as $index => $item){
@@ -113,7 +115,7 @@
                 if ($item['best_seller']) {
                     $status[] = 'Best Sellers';
                 }
-                $status_display = !empty($status) ? implode(', ', $status) : 'New Arrivals';
+                $status_display = !empty($status) ? implode(', ', $status) : 'Không có danh mục';
 
                 echo '<tr class="text-center">
                         <td class="align-middle">'.$stt.'</td>
@@ -178,7 +180,7 @@
             // Modal cho hình ảnh
             $images = json_decode($item['images'], true);
             echo '<div class="modal fade" id="imageModal'.$item['id'].'" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel'.$item['id'].'" aria-hidden="true">
-                    <div class="modal-dialog modal-xl" role="document">
+                    <div class="modal-dialog modal-sl" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="imageModalLabel'.$item['id'].'">Hình ảnh: '.$item['ten_sp'].'</h5>
@@ -224,4 +226,6 @@
     require_once 'pagination.php';
     echo renderPagination($current_page, $total_pages, '?act=san_pham&page=%d');
 ?>
-<script src="http://localhost/fanimation/public/JS/back_product.js"></script>
+<script src="http://localhost/project/public/JS/back_product.js"></script>
+
+

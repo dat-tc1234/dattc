@@ -1,0 +1,58 @@
+.toc-container {
+    border: 1px solid #ddd;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 14px; /* Giảm kích thước menu mục lục */
+}
+
+.toc-container h4 {
+    font-size: 16px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #6c757d; /* Màu xám cho chữ */
+}
+
+.toc-container ol {
+    padding-left: 20px;
+}
+
+.toc-container ol li {
+    margin-bottom: 8px;
+    font-size: 14px; /* Kích thước nhỏ cho mục */
+}
+
+.toc-container ol li a {
+    color: #6c757d; /* Màu xám cho các liên kết */
+    text-decoration: none;
+}
+
+.toc-container ol li a:hover {
+    text-decoration: underline;
+}
+
+/* Phong cách cho phần nội dung */
+h4 {
+    margin-top: 40px;
+}
+
+.table-bordered {
+    margin-top: 30px;
+}
+img{
+    width: 80%;
+    margin-top: 20px;
+    
+}
+
+.highlight-section {
+    text-align: center; /* Căn giữa nội dung */
+    background-color: #e9e8e8; /* Màu nền xám nhạt */
+    padding-top: 10px;
+    padding-bottom: 5px;
+    margin-bottom: 20px;
+   
+    font-style: italic; /* Làm nghiêng chữ */
+    width: 80%;
+}

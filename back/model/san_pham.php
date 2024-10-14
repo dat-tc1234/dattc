@@ -47,9 +47,9 @@
         return $kq;
     }
 
-    function update_product($id, $ten_sp, $gia, $so_luong_hang, $mo_ta_sp, $id_danh_muc, $cong_suat, $cong_nghe, $chat_lieu, $chuc_nang, $so_canh, $toc_do, $images = "", $new_arrival, $featured, $best_seller) {
+    function update_product($id, $ten_sp, $gia, $so_luong_hang, $mo_ta_sp, $id_danh_muc, $cong_suat, $cong_nghe, $chat_lieu, $chuc_nang, $so_canh, $toc_do, $new_arrival, $featured, $best_seller, $images = "") {
         $conn = connect_db();
-        if($images == "") {
+        if ($images == "") {
             $sql = "UPDATE products SET ten_sp = :ten_sp, gia = :gia, so_luong_hang = :so_luong_hang, 
                     mo_ta_sp = :mo_ta_sp, id_danh_muc = :id_danh_muc, cong_suat = :cong_suat, 
                     cong_nghe = :cong_nghe, chat_lieu = :chat_lieu, chuc_nang = :chuc_nang, 
@@ -62,7 +62,7 @@
                     so_canh = :so_canh, toc_do = :toc_do, images = :images, 
                     new_arrival = :new_arrival, featured = :featured, best_seller = :best_seller WHERE id = :id";
         }
-        
+    
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':ten_sp', $ten_sp);
         $stmt->bindParam(':gia', $gia);
@@ -79,10 +79,10 @@
         $stmt->bindParam(':featured', $featured);
         $stmt->bindParam(':best_seller', $best_seller);
         $stmt->bindParam(':id', $id);
-        if($images != "") {
+        if ($images != "") {
             $stmt->bindParam(':images', $images);
         }
-        
+    
         $stmt->execute();
     }
 
@@ -125,6 +125,32 @@
         $stmt->bindParam(':start', $start, PDO::PARAM_INT);
         $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
         $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    function is_product_exists($ten_sp) {
+        $conn = connect_db();
+        $stmt = $conn->prepare("SELECT COUNT(*) FROM products WHERE ten_sp = :ten_sp");
+        $stmt->bindParam(':ten_sp', $ten_sp);
+        $stmt->execute();
+        $count = $stmt->fetchColumn();
+        
+        return $count > 0; 
+    }
+
+    function get_products_based_on_filters() {
+        global $current_page, $items_per_page; 
+    
+        $conn = connect_db();
+        $offset = ($current_page - 1) * $items_per_page; 
+    
+        
+        $sql = "SELECT * FROM products WHERE hien_thi_sp = 1 ORDER BY ngay_dang DESC LIMIT :limit OFFSET :offset"; 
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':limit', $items_per_page, PDO::PARAM_INT);
+        $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
+        $stmt->execute();
+    
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
     

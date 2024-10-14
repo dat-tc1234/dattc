@@ -1,38 +1,44 @@
 <?php
-function check_username_exists($username) {
-    $conn = connect_db();
-    $sql = "SELECT COUNT(*) FROM user WHERE user_name = :username";
-    $stmt = $conn->prepare($sql);
-    $stmt->bindParam(':username', $username, PDO::PARAM_STR);
-    $stmt->execute();
-    return $stmt->fetchColumn() > 0;
-}
 
-function check_email_exists($email) {
+function add_user($name, $email, $password) {
     $conn = connect_db();
-    $sql = "SELECT COUNT(*) FROM user WHERE email = :email";
-    $stmt = $conn->prepare($sql);
-    $stmt->bindParam(':email', $email, PDO::PARAM_STR);
-    $stmt->execute();
-    return $stmt->fetchColumn() > 0;
-}
-
-function register_user($username, $email, $password) {
-    $conn = connect_db();
-    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-    $sql = "INSERT INTO user (user_name, email, password, role, hien_thi_user) VALUES (:username, :email, :password, 1, 1)";
-    $stmt = $conn->prepare($sql);
-    $stmt->bindParam(':username', $username, PDO::PARAM_STR);
-    $stmt->bindParam(':email', $email, PDO::PARAM_STR);
-    $stmt->bindParam(':password', $hashed_password, PDO::PARAM_STR);
+    $stmt = $conn->prepare("INSERT INTO user (user_name, email, password) VALUES (:name, :email, :password)");
+    $stmt->bindParam(':name', $name);
+    $stmt->bindParam(':email', $email);
+    $stmt->bindParam(':password', $password);
+    
     return $stmt->execute();
 }
 
-function get_user_by_username($username) {
+function authenticate_user($username, $password) {
     $conn = connect_db();
-    $sql = "SELECT * FROM user WHERE user_name = :username";
-    $stmt = $conn->prepare($sql);
-    $stmt->bindParam(':username', $username, PDO::PARAM_STR);
+    $stmt = $conn->prepare("SELECT * FROM user WHERE user_name = :username");
+    $stmt->bindParam(':username', $username);
     $stmt->execute();
-    return $stmt->fetch(PDO::FETCH_ASSOC);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($user && $user['hien_thi_user'] == 1) {
+        // Kiểm tra mật khẩu
+        if (password_verify($password, $user['password'])) {
+            // Lưu thông tin người dùng vào session
+            $_SESSION['user'] = [
+                'user_name' => $user['user_name'],
+                'email' => $user['email'],
+                // Thêm các thông tin khác nếu cần
+            ];
+            return $user; 
+        }
+    }
+    return false;
 }
+function is_username_exists($username) {
+    $conn = connect_db();
+    $stmt = $conn->prepare("SELECT COUNT(*) FROM user WHERE user_name = :username");
+    $stmt->bindParam(':username', $username);
+    $stmt->execute();
+    $count = $stmt->fetchColumn();
+    
+    return $count > 0; 
+}
+
+?>

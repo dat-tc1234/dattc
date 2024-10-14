@@ -1,0 +1,40 @@
+body {
+    background-color:black;
+}
+.container {
+    max-width: 900px;
+    margin: 100px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+}
+.left {
+    flex: 50%;
+    margin-right: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.right {
+    flex: 50%;
+    text-align: center;
+}
+.right img {
+    width: 100%;
+    height: auto;  
+}
+.form-floating-label {
+    margin-bottom: 1.5rem;
+}
+.btn {
+    padding: 10px 20px;
+    font-size: 1.2rem;
+}
+h1 {
+    margin-bottom: 20px;
+    font-weight: bold;
+}

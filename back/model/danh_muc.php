@@ -66,7 +66,6 @@ function get_hidden_categories() {
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
-
 function get_categories_hierarchical() {
     $categories = getall_dm();
     $tree = [];
@@ -99,4 +98,5 @@ function &find_parent(&$categories, $parent_id) {
     $result = null;
     return $result;
 }
+
 

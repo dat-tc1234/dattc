@@ -1,0 +1,143 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f0f8ff;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* Main container alignment */
+.main-container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+
+/* Header styling */
+h1, h2, h4 {
+    color: #0077be; /* Ocean blue */
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+/* New arrival section */
+.New-arrival {
+    text-align: center;
+    margin: 40px 0;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.New-arrival h1 {
+    font-size: 2.5rem;
+}
+
+.New-arrival p {
+    font-size: 1.1rem;
+    color: #555;
+}
+
+/* Product card styling */
+.card {
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease-in-out;
+    background-color: #fff;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Product image styling */
+.card-img-top {
+    height: 220px;
+    object-fit: cover;
+    transition: transform 0.3s ease-in-out;
+}
+
+.card:hover .card-img-top {
+    transform: scale(1.05);
+}
+
+/* Product information */
+.card-body {
+    text-align: center;
+    padding: 20px;
+}
+
+.card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #0077be; /* Ocean blue */
+    margin-top: 10px;
+}
+
+.card-text {
+    font-size: 1rem;
+    color: #666;
+    margin-top: 5px;
+}
+
+/* Add to cart button */
+.market-button {
+    display: inline-block;
+    background-color: #005a9e; /* Deep ocean blue */
+    color: #fff;
+    padding: 10px 25px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0px 4px 12px rgba(0, 90, 158, 0.3);
+    margin-top: 15px;
+    font-size: 1rem;
+}
+
+.market-button:hover {
+    background-color: #004080; /* Darker blue */
+    box-shadow: 0px 8px 16px rgba(0, 90, 158, 0.5);
+}
+
+/* Responsive adjustments for product cards */
+@media (max-width: 768px) {
+    .card-img-top {
+        height: 180px;
+    }
+
+    .New-arrival h1 {
+        font-size: 2rem;
+    }
+
+    .New-arrival p {
+        font-size: 1rem;
+    }
+}
+
+/* Footer payment section */
+.footer-payment {
+    margin-top: 50px;
+    text-align: center;
+}
+
+.footer-payment h6 {
+    font-weight: bold;
+    color: #333;
+}
+
+.footer-payment img {
+    max-width: 150px;
+    filter: grayscale(100%);
+    transition: filter 0.3s ease;
+}
+
+.footer-payment img:hover {
+    filter: grayscale(0%);
+}

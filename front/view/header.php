@@ -1,211 +1,291 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" 
-          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    
-    <!-- Font Awesome -->
+    <title>Quạt Store</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-    
-    <!-- Google Fonts -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0">
-    
-    <!-- Custom Font from onlinewebfonts -->
-    <link href="https://db.onlinewebfonts.com/c/b82329475307e0380dc1ea23f0c35266?family=adineue+PRO" rel="stylesheet" type="text/css"/>
-    
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="http://localhost/fanimation/public/css/code1.css">
-    <link rel="stylesheet" href="http://localhost/fanimation/public/css/code2.css">
-    
     <style>
-    .dropdown-submenu {
-        position: relative;
-    }
-    .dropdown-submenu > .dropdown-menu {
-        top: 0;
-        left: 100%;
-        margin-top: -6px;
-    }
-    /* Chỉ áp dụng hover cho thiết bị không phải touch */
-    @media (hover: hover) and (pointer: fine) {
-        .dropdown-submenu:hover > .dropdown-menu {
-            display: block;
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #e0f7fa, #ffecb3);
+            color: #333;
+            margin: 0;
+            padding: 0;
         }
-    }
-    .dropdown-item:hover, .dropdown-item:focus {
-        background-color: #f8f9fa;
-    }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 10px 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            position: relative;
+        }
+
+        .navbar-container {
+            width: 100%;
+            padding: 0 20px;
+        }
+
+        .custom-logo {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Fan Animation */
+        .rotating-fan {
+            font-size: 2rem;
+            color: #007bff;
+            animation: spin 3s linear infinite;
+            margin-right: 10px;
+        }
+
+        /* Additional Fan Icons for Background */
+        .fan-icon {
+            font-size: 2rem;
+            color: rgba(0, 123, 255, 0.2);
+            position: absolute;
+            opacity: 0.8;
+            animation: spin 15s linear infinite;
+        }
+
+        .fan-icon-1 {
+            top: 10%;
+            left: 20%;
+            animation-duration: 10s;
+        }
+
+        .fan-icon-2 {
+            top: 30%;
+            right: 25%;
+            animation-duration: 8s;
+        }
+
+        .fan-icon-3 {
+            bottom: 15%;
+            left: 15%;
+            animation-duration: 12s;
+        }
+
+        /* Spin Keyframe */
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Navbar Links and Effects */
+        .nav-items .nav-link {
+            color: #333;
+            font-weight: bold;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: color 0.3s, background-color 0.3s;
+        }
+
+        .nav-items .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            left: 50%;
+            bottom: -5px;
+            background-color: #007bff;
+            transition: all 0.3s ease;
+        }
+
+        .nav-items .nav-link:hover::after {
+            width: 100%;
+            left: 0;
+        }
+
+        /* Other Styles, Including Search Form and Icons */
+        .custom-icon-links .icon-link {
+            font-size: 1.2rem;
+            color: #333;
+            margin-right: 15px;
+            transition: color 0.3s, transform 0.3s ease;
+        }
+
+        .custom-icon-links .icon-link:hover {
+            color: #007bff;
+            transform: rotate(20deg);
+        }
+
+        .custom-search-form {
+            display: flex;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 25px;
+            padding: 5px 10px;
+            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s;
+        }
+
+        .custom-search-input {
+            border: none;
+            outline: none;
+            background: transparent;
+            width: 200px;
+            padding: 5px 10px;
+            transition: width 0.4s;
+        }
+
+        .custom-search-input:focus {
+            width: 250px;
+            background-color: #fff;
+        }
+
+        .custom-search-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s, transform 0.2s;
+            box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+        }
+
+        .custom-search-button:hover {
+            background-color: #0056b3;
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(0, 123, 255, 0.8);
+        }
+
+        @media (max-width: 768px) {
+            .custom-icon-links {
+                display: none;
+            }
+
+            .custom-search-form {
+                width: 100%;
+                padding-top: 10px;
+            }
+
+            .custom-search-input {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .navbar-nav {
+                text-align: center;
+            }
+
+            .custom-search-form {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .custom-search-input {
+                margin-bottom: 10px;
+            }
+        }
     </style>
 </head>
 
-<body style="font-family: 'AdihausDIN', Arial, Helvetica, sans-serif;">
-    <div class="container-fluid">
-        
-        <div id="preloader"></div>
+<body>
+    <div class="header">
+        <nav class="navbar navbar-expand-lg custom-navbar">
+            <div class="container-fluid navbar-container">
+                <!-- Rotating Fan Icon in the Logo -->
+                <a class="navbar-brand custom-brand" href="#">
+                    <i class="fas fa-fan rotating-fan"></i> Quạt Store
+                </a>
 
-        <div class="notification-bar" id="notification-bar">
-            <div class="notification-content">
-                <p id="notification-text">EASY RETURN</p>
-                <i class="fa-solid fa-chevron-down"></i>
-            </div>
-        </div>
+                <!-- Background Fan Icons for Effect -->
+                <i class="fas fa-fan fan-icon fan-icon-1"></i>
+                <i class="fas fa-fan fan-icon fan-icon-2"></i>
+                <i class="fas fa-fan fan-icon fan-icon-3"></i>
 
-        <!-- Desktop View -->
-        <div class="header">
-            <div class="header-top d-flex justify-content-end">
-                <ul class="list-inline mb-0">
-                    <li class="list-inline-item"><a href="#">help</a></li>
-                    <li class="list-inline-item"><a href="#">order tracker</a></li>
-                    <li class="list-inline-item"><a href="#">become a member</a></li>
-                    <li class="list-inline-item"><img src="/img/Flag_of_the_United_States.svg.png" alt="Flag" class="header-flag"></li>
-                </ul>
-            </div>
-
-            <img src="/img/adidas_logo.png" alt="Adidas Logo" class="adidas-logo d-block mx-auto">
-
-            <div class="header-bottom pb-2">
-                <nav class="navbar navbar-expand-lg navbar-light">
-                    <div class="container-fluid">
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                            <ul class="navbar-nav">
-                                <?php
-                                function display_menu($categories) {
-                                    foreach ($categories as $category) {
-                                        if (!empty($category['children'])) {
-                                            echo '<li class="nav-item dropdown">';
-                                            echo '<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown' . $category['id'] . '" role="button" data-bs-toggle="dropdown" aria-expanded="false">' . htmlspecialchars($category['ten_danh_muc']) . '</a>';
-                                            echo '<ul class="dropdown-menu" aria-labelledby="navbarDropdown' . $category['id'] . '">';
-                                            display_submenu($category['children']);
-                                            echo '</ul>';
-                                            echo '</li>';
-                                        } else {
-                                            echo '<li class="nav-item">';
-                                            echo '<a class="nav-link" href="#">' . htmlspecialchars($category['ten_danh_muc']) . '</a>';
-                                            echo '</li>';
-                                        }
-                                    }
-                                }
-
-                                function display_submenu($categories) {
-                                    foreach ($categories as $category) {
-                                        if (!empty($category['children'])) {
-                                            echo '<li class="dropdown-submenu">';
-                                            echo '<a class="dropdown-item dropdown-toggle" href="#">' . htmlspecialchars($category['ten_danh_muc']) . '</a>';
-                                            echo '<ul class="dropdown-menu">';
-                                            display_submenu($category['children']);
-                                            echo '</ul>';
-                                            echo '</li>';
-                                        } else {
-                                            echo '<li><a class="dropdown-item" href="#">' . htmlspecialchars($category['ten_danh_muc']) . '</a></li>';
-                                        }
-                                    }
-                                }
-                                display_menu($categories);
-                                ?>
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
-
-                <div class="right-section">
-                    <div class="search-bar d-none d-md-flex align-items-center me-3">
-                        <input type="text" placeholder="Search" class="form-control border-0">
-                        <button class="btn"><i class="fa fa-search"></i></button>
-                    </div>
-
-                    <div class="header-icons">
-                        <a href="#" class="me-2"><i class="fa-regular fa-user"></i></a>
-                        <a href="#" class="me-2"><i class="fa-regular fa-heart"></i></a>
-                        <a href="#"><i class="fa-solid fa-bag-shopping"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Mobile View -->
-        <div class="header-mobile d-lg-none">
-            <div class="mobile-left">
-                <button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu" aria-controls="mobileMenu">
-                    <i class="fa-solid fa-bars"></i>
+                <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
                 </button>
-                <a href="#" class="me-2"><i class="fa-regular fa-heart"></i></a>
-            </div>
+                <div class="collapse navbar-collapse custom-navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav nav-items">
+                        <?php if (!isset($categories) || !is_array($categories)) {
+                            $categories = [];
+                        } ?>
+                        <?php foreach ($categories as $category): ?>
+                            <li class="nav-item dropdown custom-dropdown">
+                                <a class="nav-link dropdown-toggle custom-nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <?php echo htmlspecialchars($category['ten_danh_muc']); ?>
+                                </a>
+                                <ul class="dropdown-menu custom-dropdown-menu">
+                                    <?php if (!empty($category['children'])): ?>
+                                        <?php foreach ($category['children'] as $child): ?>
+                                            <li>
+                                                <a class="dropdown-item custom-dropdown-item" href="http://localhost/Project/front/view/category_products.php?category_id=<?php echo $child['id']; ?>">
+                                                    <?php echo htmlspecialchars($child['ten_danh_muc']); ?>
+                                                </a>
+                                            </li>
+                                        <?php endforeach; ?>
+                                    <?php endif; ?>
+                                </ul>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
 
-            <div class="mobile-middle">
-                <img src="/img/adidas_logo.png" alt="Adidas Logo">
-            </div>
-
-            <div class="mobile-right">
-                <ul class="list-inline mb-0">
-                    <li class="list-inline-item"><a href="#" class="me-2"><i class="fa-regular fa-user"></i></a></li>
-                    <li class="list-inline-item"><a href="#" class="me-2"><i class="fa fa-search"></i></a></li>
-                    <li class="list-inline-item"><a href="#"><i class="fa-solid fa-bag-shopping"></i></a></li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Mobile Menu Offcanvas -->
-        <div class="offcanvas offcanvas-start" tabindex="-1" id="mobileMenu" aria-labelledby="mobileMenuLabel">
-            <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="mobileMenuLabel">Menu</h5>
-                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-            </div>
-            <div class="offcanvas-body">
-                <ul class="navbar-nav">
-                    <?php display_menu($categories); ?>
-                </ul>
-            </div>
-        </div>
-
-        <div class="modal fade" id="signInModal" tabindex="-1" aria-labelledby="signInModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="signInModalLabel">Sign In Required</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <!-- Login, Register, and Cart Icon Links -->
+                    <div class="custom-icon-links d-none d-lg-flex">
+                        <?php if (!isset($_SESSION['user'])): ?>
+                            <a href="#" class="icon-link" aria-label="Cart" onclick="showLoginAlert(event)">
+                                <i class="fa-solid fa-bag-shopping"></i>
+                            </a>
+                            <a href="#" class="icon-link" aria-label="Favorites" onclick="showLoginAlert(event)">
+                                <i class="fa-solid fa-heart"></i>
+                            </a>
+                            <a href="http://localhost/Project/front/view/login.php" class="icon-link" aria-label="Login">
+                                <i class="fa-solid fa-user"></i> Đăng nhập
+                            </a>
+                            <a href="http://localhost/Project/front/view/register.php" class="icon-link" aria-label="Register">
+                                <i class="fa-solid fa-user-plus"></i> Đăng ký
+                            </a>
+                        <?php else: ?>
+                            <a href="http://localhost/Project/front/view/shopping_cart.php" class="icon-link" aria-label="Cart">
+                                <i class="fa-solid fa-bag-shopping"></i>
+                            </a>
+                            <a href="http://localhost/Project/front/view/favorites.php" class="icon-link" aria-label="Favorites">
+                                <i class="fa-solid fa-heart"></i>
+                            </a>
+                            <span class="icon-link" aria-label="User">
+                                <strong><?php echo 'Xin chào ' . htmlspecialchars($_SESSION['user']['user_name']); ?></strong>
+                            </span>
+                            <a href="http://localhost/Project/front/view/logout.php" class="btn btn-link" aria-label="Logout">
+                                Đăng xuất
+                            </a>
+                        <?php endif; ?>
                     </div>
-                    <div class="modal-body">
-                        You must sign in or register to perform this action.
-                    </div>
-                    <div class="modal-footer">
-                        <a href="login.html" class="btn btn-primary">Sign In</a>
-                        <a href="register.html" class="btn btn-secondary">Register</a>
-                    </div>
+
+                    <!-- Search Form -->
+                    <form class="custom-search-form" role="search" action="http://localhost/Project/front/view/search.php" method="GET">
+                        <input class="form-control custom-search-input" type="search" name="query" placeholder="Tìm kiếm sản phẩm" aria-label="Search">
+                        <button class="custom-search-button" type="submit">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </form>
                 </div>
             </div>
-        </div>
+        </nav>
     </div>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" 
-            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" 
-            crossorigin="anonymous"></script>
-
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var dropdownSubmenus = document.querySelectorAll('.dropdown-submenu');
-        dropdownSubmenus.forEach(function(dropdownSubmenu) {
-            dropdownSubmenu.addEventListener('click', function(e) {
-                var nextEl = this.nextElementSibling;
-                if(nextEl && nextEl.classList.contains('dropdown-menu')) {
-                    e.preventDefault();
-                    if(nextEl.style.display == 'block'){
-                        nextEl.style.display = 'none';
-                    } else {
-                        nextEl.style.display = 'block';
-                    }
-                }
-            });
-        });
-    });
+        function showLoginAlert(event) {
+            event.preventDefault();
+            alert("Bạn cần đăng nhập để sử dụng tính năng này.");
+        }
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
 </body>
+
 </html>

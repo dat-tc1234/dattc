@@ -1,0 +1,92 @@
+/* Điều chỉnh navbar */
+.custom-navbar {
+    background-color: #f8f9fa;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Tùy chỉnh nav-items cho màn hình lớn */
+.nav-items .nav-item {
+    margin: 0 10px;
+}
+
+.custom-icon-links .icon-link {
+    font-size: 1.2rem;
+    color: #333;
+    transition: color 0.3s;
+}
+
+.custom-icon-links .icon-link:hover {
+    color: #007bff;
+}
+
+/* Tùy chỉnh các button tìm kiếm */
+.custom-search-form {
+    display: flex;
+    align-items: center;
+}
+
+.custom-search-input {
+    width: 200px;
+    transition: width 0.4s;
+}
+
+.custom-search-input:focus {
+    width: 300px;
+}
+
+/* Responsive cho màn hình nhỏ hơn 768px */
+@media (max-width: 768px) {
+    /* Điều chỉnh logo */
+    .navbar-brand img {
+        width: 120px;
+        height: auto;
+    }
+
+    /* Ẩn icon-link trên màn hình nhỏ */
+    .custom-icon-links {
+        display: none;
+    }
+
+    /* Đặt tìm kiếm ở giữa */
+    .custom-search-form {
+        width: 100%;
+        padding-top: 10px;
+    }
+
+    .custom-search-input {
+        width: 100%;
+    }
+}
+
+/* Responsive cho màn hình nhỏ hơn 576px */
+@media (max-width: 576px) {
+    /* Chỉnh các mục nav thành hàng dọc */
+    .navbar-nav {
+        text-align: center;
+    }
+
+    /* Giảm kích thước icon */
+    .custom-icon-links .icon-link {
+        font-size: 1rem;
+    }
+
+    /* Điều chỉnh form tìm kiếm */
+    .custom-search-form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .custom-search-input {
+        margin-bottom: 10px;
+    }
+
+    /* Tăng khoảng cách các mục dropdown */
+    .custom-dropdown-menu .dropdown-item {
+        padding: 10px 15px;
+    }
+}

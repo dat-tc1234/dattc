@@ -1,0 +1,49 @@
+.image-item {
+        margin-right: 50px; /* Khoảng cách giữa các sản phẩm theo chiều ngang */
+        margin-bottom: 20px; /* Khoảng cách giữa các sản phẩm theo chiều dọc */
+        display: inline-block; /* Để các sản phẩm nằm ngang */
+        vertical-align: top; /* Để các sản phẩm căn chỉnh theo chiều dọc */
+        width: calc(20% - 15px); /* Chiếm 20% chiều rộng của dòng, trừ đi khoảng cách */
+    }
+    .image-list {
+        display: flex; /* Sử dụng flexbox để sắp xếp sản phẩm */
+        flex-wrap: wrap; /* Cho phép các sản phẩm xuống dòng nếu không đủ chỗ */
+        justify-content: flex-start; /* Đặt các sản phẩm gần lề bên trái */
+        padding: 0; /* Loại bỏ padding của container */
+        margin: 0; /* Loại bỏ margin của container */
+    }
+    .container {
+        padding-left: 0; /* Loại bỏ padding bên trái của container */
+        padding-right: 0; /* Loại bỏ padding bên phải của container */
+    }
+    h4 {
+        margin-top: 30px; /* Khoảng cách phía trên thẻ h4 */
+        margin-bottom: 50px; /* Khoảng cách phía dưới thẻ h4 */
+       
+    }
+
+    /* Responsive styles */
+    @media (max-width: 1200px) {
+        .image-item {
+            width: calc(25% - 15px); /* 4 sản phẩm trên một dòng */
+        }
+    }
+
+    @media (max-width: 992px) {
+        .image-item {
+            width: calc(33.33% - 15px); /* 3 sản phẩm trên một dòng */
+        }
+    }
+
+    @media (max-width: 768px) {
+        .image-item {
+            width: calc(50% - 15px); /* 2 sản phẩm trên một dòng */
+        }
+    }
+
+    @media (max-width: 576px) {
+        .image-item {
+            width: 100%; /* 1 sản phẩm trên một dòng */
+            margin-right: 0; /* Loại bỏ margin bên phải */
+        }
+    }

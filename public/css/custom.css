@@ -1,0 +1,104 @@
+/* CSS tùy chỉnh cho giao diện */
+body {
+    font-family: 'Quicksand', sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+h1 {
+    color: #007bff;
+    font-weight: bold;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+.table-striped th, .table-striped td {
+    vertical-align: middle;
+}
+
+.btn {
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+}
+
+.table-striped tbody tr:hover {
+    background-color: #e9ecef;
+}
+
+.alert {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 999;
+    box-shadow: 0 4px 10px rgba(0, 0,0, 0.2);
+    border-radius: 8px;
+}
+
+.modal-content {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.modal-header {
+    background: linear-gradient(135deg, #74b9ff, #a29bfe);
+    color: #fff;
+}
+
+.modal-header .btn-close {
+    color: #fff;
+}
+
+.modal-title {
+    font-weight: bold;
+}
+
+.form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+}
+
+.form-text.text-muted {
+    font-size: 0.85rem;
+    color: #6c757d;
+}
+
+input[type="checkbox"] {
+    accent-color: #007bff;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.pagination .page-item .page-link {
+    color: #007bff;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.pagination .page-item:hover .page-link {
+    background-color: #e9ecef;
+}
+
+.btn-info {
+    background-color: #5bc0de;
+    border: none;
+}
+
+.btn-warning {
+    background-color: #f0ad4e;
+    border: none;
+}
+
+.btn-danger {
+    background-color: #d9534f;
+    border: none;
+}
+
+.carousel-inner img {
+    border-radius: 10px;
+}
+

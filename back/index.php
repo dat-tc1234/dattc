@@ -51,7 +51,6 @@ if (isset($_GET['act'])) {
             if(isset($_GET['id'])){
                 $id = $_GET['id'];
                 delete_category($id);
-                // Thiết lập thông báo xóa thành công
                 $_SESSION['success'] = "Xóa danh mục thành công!";
             }
             header("Location: index.php?act=danh_muc");
@@ -61,9 +60,9 @@ if (isset($_GET['act'])) {
             if(isset($_GET['id'])) {
                 $id = $_GET['id'];
                 restore_category($id);
-                $_SESSION['success'] = "Khôi phục danh mục thành công!"; // Thêm thông báo thành công
+                $_SESSION['success'] = "Khôi phục danh mục thành công!"; 
             }
-            header("Location: index.php?act=muc_an.php"); // Chuyển hướng về trang mục ẩn
+            header("Location: index.php?act=muc_an.php"); 
             break;
 
         case 'san_pham':
@@ -109,17 +108,16 @@ if (isset($_GET['act'])) {
                     }
                 }
                             
-                // Lấy giá trị từ checkbox
+
                 $new_arrival = isset($_POST['new_arrival']) ? 1 : 0;
                 $featured = isset($_POST['featured']) ? 1 : 0;
                 $best_seller = isset($_POST['best_seller']) ? 1 : 0;
 
-                // Gọi hàm insert_product với các tham số
                 insert_product($id_danh_muc, $ten_sp, $gia, $so_luong_hang, $mo_ta_sp, $images, $cong_suat, $cong_nghe, $chat_lieu, $chuc_nang, $so_canh, $toc_do, $new_arrival, $featured, $best_seller);
                 header("Location: index.php?act=san_pham");
                 $_SESSION['success'] = "Thêm sản phẩm thành công!";
                 header("Location: index.php?act=san_pham");
-                exit(); // Dừng thực thi để tránh gửi thêm thông báo
+                exit();
             }
             break;
 
@@ -190,9 +188,9 @@ if (isset($_GET['act'])) {
             if(isset($_GET['id'])) {
                 $id = $_GET['id'];
                 restore_product($id);
-                $_SESSION['success'] = "Khôi phục sản phẩm thành công!"; // Thêm thông báo thành công
+                $_SESSION['success'] = "Khôi phục sản phẩm thành công!"; 
             }
-            header("Location: index.php?act=muc_an.php"); // Chuyển hướng về trang mục ẩn
+            header("Location: index.php?act=muc_an.php"); 
             break;
 
         case 'them_nguoi_dung':
@@ -231,9 +229,9 @@ if (isset($_GET['act'])) {
             if(isset($_GET['id'])) {
                 $id = $_GET['id'];
                 restore_user($id);
-                $_SESSION['success'] = "Khôi phục người dùng thành công!"; // Thêm thông báo thành công
+                $_SESSION['success'] = "Khôi phục người dùng thành công!"; 
             }
-            header("Location: index.php?act=hidden_items"); // Chuyển hướng về trang mục ẩn
+            header("Location: index.php?act=hidden_items"); 
             break;
 
         case 'hidden_items':
@@ -249,10 +247,10 @@ if (isset($_GET['act'])) {
             include "model/review.php";
             if(isset($_GET['action']) && $_GET['action'] == 'hide' && isset($_GET['id'])) {
                 $review_id = $_GET['id'];
-                hide_review($review_id);
+                hide_review($review_id); // Gọi hàm ẩn bình luận
                 header("Location: index.php?act=danh_gia_va_phan_hoi_khach_hang");
                 exit();
-            }
+             }
             $reviews = get_all_reviews();
             include "view/review.php";
             break;
