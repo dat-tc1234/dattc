@@ -128,122 +128,116 @@ foreach ($_SESSION['cart'] as $item) {
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
 
-    document.getElementById("cart-items").addEventListener("click", function (e) {
-        if (e.target.classList.contains("increase-quantity")) {
-            const productId = e.target.dataset.id;
-            updateQuantity(productId, 'increase', e.target);
-        } else if (e.target.classList.contains("decrease-quantity")) {
-            const productId = e.target.dataset.id;
-            updateQuantity(productId, 'decrease', e.target);
+    // Event listener for quantity update (increase/decrease buttons)
+document.getElementById("cart-items").addEventListener("click", function (e) {
+    if (e.target.classList.contains("increase-quantity") || e.target.classList.contains("decrease-quantity")) {
+        const productId = e.target.dataset.id;
+        const action = e.target.classList.contains("increase-quantity") ? 'increase' : 'decrease';
+        updateQuantity(productId, action, e.target);
+    }
+});
+
+// Update quantity in the cart
+function updateQuantity(productId, action, button) {
+    fetch('http://localhost/Project/front/view/cart_handler.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({ action: 'update_quantity', product_id: productId, update_action: action })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            const cartItem = button.closest(".cart-item");
+            const quantityInput = cartItem.querySelector(".quantity");
+            quantityInput.value = data.new_quantity;
+
+            document.getElementById("cart-total").textContent = data.new_total.toLocaleString() + "₫";
+            document.getElementById("summary-total").textContent = data.new_total.toLocaleString() + "₫";
+            document.getElementById("final-total").textContent = data.new_total.toLocaleString() + "₫";
+        } else {
+            console.error(data.message);
         }
-    });
+    })
+    .catch(error => console.error("Error:", error));
+}
 
-    document.querySelectorAll(".increase-quantity").forEach(button => {
-        button.addEventListener("click", function () {
-            const productId = this.dataset.id;
-            updateQuantity(productId, 'increase');
-        });
-    });
-
-    document.querySelectorAll(".decrease-quantity").forEach(button => {
-        button.addEventListener("click", function () {
-            const productId = this.dataset.id;
-            updateQuantity(productId, 'decrease');
-        });
-    });
-
-    function updateQuantity(productId, action, button) {
+// Remove a single item from the cart
+document.querySelectorAll(".remove-item").forEach(button => {
+    button.addEventListener("click", function () {
+        const productId = this.dataset.id;
         fetch('http://localhost/Project/front/view/cart_handler.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: new URLSearchParams({ action: 'update_quantity', product_id: productId, update_action: action })
+            body: new URLSearchParams({ action: 'remove_item', product_id: productId })
         })
         .then(response => response.json())
         .then(data => {
+            alert(data.message);
             if (data.status === 'success') {
-                const quantityInput = button.parentElement.querySelector(".quantity");
-                quantityInput.value = data.new_quantity;
-
-                document.getElementById("cart-total").textContent = data.new_total.toLocaleString() + "₫";
-                document.getElementById("summary-total").textContent = data.new_total.toLocaleString() + "₫";
-            } else {
-                alert(data.message);
+                location.reload(); // Reload page to reflect changes
             }
         })
         .catch(error => console.error("Error:", error));
-    }
-
-    document.querySelectorAll(".remove-item").forEach(button => {
-        button.addEventListener("click", function () {
-            const productId = this.dataset.id;
-            fetch('http://localhost/Project/front/view/cart_handler.php', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: new URLSearchParams({ action: 'remove_item', product_id: productId })
-            })
-            .then(response => response.json())
-            .then(data => {
-                alert(data.message);
-                location.reload();
-            })
-            .catch(error => console.error("Error:", error));
-        });
     });
+});
 
-    function removeAllItems() {
-        fetch('http://localhost/Project/front/view/cart_handler.php', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: new URLSearchParams({ action: 'remove_all' })
-        })
-        .then(response => response.json())
-        .then(data => {
-            alert(data.message);
-            if (data.status === "success") {
-                location.reload();
-            }
-        })
-        .catch(error => console.error("Error:", error));
-    }
-
-
-    document.getElementById("checkout-button").addEventListener("click", function () {
-        var myModal = new bootstrap.Modal(document.getElementById('checkoutModal'));
-        myModal.show();
-    });
-
-    document.getElementById("confirm-checkout").addEventListener("click", function () {
-        const totalAmount = parseInt(document.getElementById("final-total").textContent.replace("₫", "").replace(",", "")) || 0;
-        const name = document.getElementById("recipient-name").value;
-        const phone = document.getElementById("recipient-phone").value;
-        const address = document.getElementById("recipient-address").value;
-
-        // Kiểm tra thông tin thanh toán
-        if (!name || !phone || !address) {
-            alert("Vui lòng điền đầy đủ thông tin để thanh toán.");
-            return;
+// Remove all items from the cart
+function removeAllItems() {
+    fetch('http://localhost/Project/front/view/cart_handler.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({ action: 'remove_all' })
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert(data.message);
+        if (data.status === "success") {
+            location.reload(); // Reload page if items are removed successfully
         }
+    })
+    .catch(error => console.error("Error:", error));
+}
 
-        fetch("http://localhost/Project/front/view/cart_handler.php", {
-            method: "POST",
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: new URLSearchParams({
-                action: "checkout",
-                total: totalAmount,
-                name: name,
-                phoneNumber: phone,
-                address: address
-            })
+// Show checkout modal
+document.getElementById("checkout-button").addEventListener("click", function () {
+    var myModal = new bootstrap.Modal(document.getElementById('checkoutModal'));
+    myModal.show();
+});
+
+// Confirm and process checkout
+document.getElementById("confirm-checkout").addEventListener("click", function () {
+    const totalAmount = parseInt(document.getElementById("final-total").textContent.replace("₫", "").replace(",", "")) || 0;
+    const name = document.getElementById("recipient-name").value;
+    const phone = document.getElementById("recipient-phone").value;
+    const address = document.getElementById("recipient-address").value;
+
+    // Validate checkout information
+    if (!name || !phone || !address) {
+        alert("Vui lòng điền đầy đủ thông tin để thanh toán.");
+        return;
+    }
+
+    fetch("http://localhost/Project/front/view/cart_handler.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({
+            action: "checkout",
+            total: totalAmount,
+            name: name,
+            phoneNumber: phone,
+            address: address
         })
-        .then(response => response.json())
-        .then(data => {
-            alert(data.message);
-            if (data.status === "success") {
-                window.location.reload();
-            }
-        })
-        .catch(error => console.error("Error:", error));
-    });
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert(data.message);
+        if (data.status === "success") {
+            window.location.reload(); // Reload page after successful checkout
+        }
+    })
+    .catch(error => console.error("Error:", error));
+});
+
 </script>
 </body>
 </html>

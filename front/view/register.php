@@ -1,3 +1,62 @@
+<?php
+session_start();
+require_once 'C:\xampp\htdocs\Project\database\connect_db.php'; // Điều chỉnh đường dẫn cho đúng
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $user_name = trim($_POST['name']);
+    $email = trim($_POST['email']);
+    $password = trim($_POST['pwd']);
+    $confirmPassword = trim($_POST['cpwd']);
+    
+    // Kiểm tra mật khẩu có khớp không
+    if ($password !== $confirmPassword) {
+        $_SESSION['error'] = 'Mật khẩu và xác nhận mật khẩu không khớp.';
+        header("Location: register.php");
+        exit();
+    }
+
+    // Kiểm tra email đã tồn tại chưa
+    try {
+        $conn = connect_db();
+        if ($conn) {
+            $stmt = $conn->prepare("SELECT COUNT(*) FROM user WHERE email = :email");
+            $stmt->bindParam(':email', $email);
+            $stmt->execute();
+            if ($stmt->fetchColumn() > 0) {
+                $_SESSION['error'] = 'Email đã tồn tại. Vui lòng sử dụng email khác.';
+                header("Location: register.php");
+                exit();
+            }
+
+            // Mã hóa mật khẩu
+            $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+
+            // Thêm người dùng mới vào cơ sở dữ liệu
+            $stmt = $conn->prepare("INSERT INTO user (user_name, email, password, role, hien_thi_user) VALUES (:user_name, :email, :password, :role, :hien_thi_user)");
+            $stmt->bindParam(':user_name', $user_name);
+            $stmt->bindParam(':email', $email);
+            $stmt->bindParam(':password', $hashedPassword);
+            $stmt->bindValue(':role', 'user'); // Thiết lập role là 'user'
+            $stmt->bindValue(':hien_thi_user', 1); // Thiết lập hien_thi_user là 1 (hiển thị)
+
+            if ($stmt->execute()) {
+                $_SESSION['success'] = 'Đăng ký thành công! Bạn có thể đăng nhập ngay.';
+                header("Location: login.php");
+                exit();
+            } else {
+                $_SESSION['error'] = 'Đã có lỗi xảy ra trong quá trình đăng ký.';
+            }
+            close_db_connection($conn);
+        }
+    } catch (PDOException $e) {
+        $_SESSION['error'] = "Lỗi kết nối cơ sở dữ liệu: " . $e->getMessage();
+    }
+}
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -111,7 +170,7 @@
             <?php if (isset($_SESSION['success'])): ?>
                 <div class="alert alert-success"><?php echo $_SESSION['success']; unset($_SESSION['success']); ?></div>
             <?php endif; ?>
-            <form action="" method="POST">
+            <form action="register.php" method="POST">
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control" id="name" name="name" placeholder="Tên người dùng" required>
                     <label for="name">Tên người dùng</label>
@@ -130,7 +189,7 @@
                 </div>
                 <button type="submit" class="btn btn-primary w-100 mb-3">Đăng ký</button>
                 <div class="text-center">
-                    <p>Đã có tài khoản? <a href="http://localhost/Project/front/view/login.php" class="link-info">Đăng nhập ngay!</a></p>
+                    <p>Đã có tài khoản? <a href="login.php" class="link-info">Đăng nhập ngay!</a></p>
                 </div>
             </form>
         </div>

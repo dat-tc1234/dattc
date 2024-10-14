@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-// Kết nối cơ sở dữ liệu
+// Database connection (if needed)
 require_once 'C:\xampp\htdocs\Project\database\connect_db.php';
 $conn = connect_db();
 
@@ -9,19 +9,14 @@ if (!$conn) {
     die("Unable to connect to the database.");
 }
 
-// Khởi tạo giỏ hàng nếu chưa có
 if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = [];
 }
 
-// Kiểm tra yêu cầu POST và xử lý hành động tương ứng
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     $action = $_POST['action'];
-
     switch ($action) {
-        // Thêm sản phẩm vào giỏ hàng
         case 'add_to_cart':
-           
             $productId = $_POST['product_id'] ?? null;
             $productName = $_POST['product_name'] ?? null;
             $productPrice = isset($_POST['product_price']) ? (float)$_POST['product_price'] : null;
@@ -43,7 +38,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
             }
 
             if (!$productFound) {
-
                 $_SESSION['cart'][] = [
                     'id' => $productId,
                     'name' => $productName,
@@ -56,13 +50,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
             echo json_encode(['status' => 'success', 'message' => 'Sản phẩm đã được thêm vào giỏ hàng!']);
             break;
 
-        // Xóa toàn bộ giỏ hàng
         case 'remove_all':
             $_SESSION['cart'] = [];
             echo json_encode(['status' => 'success', 'message' => 'Giỏ hàng đã được xóa thành công.']);
             break;
 
-        // Xóa một sản phẩm khỏi giỏ hàng
         case 'remove_item':
             $productId = $_POST['product_id'] ?? null;
             if ($productId && isset($_SESSION['cart'])) {
@@ -75,32 +67,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
             }
             break;
 
-        // Cập nhật số lượng sản phẩm
         case 'update_quantity':
             $productId = $_POST['product_id'] ?? null;
             $updateAction = $_POST['update_action'] ?? null;
 
             if ($productId && isset($_SESSION['cart'])) {
-                
                 foreach ($_SESSION['cart'] as &$item) {
                     if ($item['id'] === $productId) {
                         if ($updateAction === 'increase') {
                             $item['quantity']++;
                         } elseif ($updateAction === 'decrease' && $item['quantity'] > 1) {
                             $item['quantity']--;
-                        } else {
-                            echo json_encode(['status' => 'error', 'message' => 'Số lượng sản phẩm không hợp lệ.']);
-                            exit;
                         }
                         break;
                     }
                 }
 
-                // Tính tổng giỏ hàng sau khi cập nhật
-                $newTotal = 0;
-                foreach ($_SESSION['cart'] as $item) {
-                    $newTotal += $item['price'] * $item['quantity'];
-                }
+                $newTotal = array_reduce($_SESSION['cart'], function ($sum, $item) {
+                    return $sum + ($item['price'] * $item['quantity']);
+                }, 0);
 
                 echo json_encode([
                     'status' => 'success',
@@ -119,4 +104,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
 } else {
     echo json_encode(['status' => 'error', 'message' => 'Phương thức yêu cầu không hợp lệ.']);
 }
-?>
